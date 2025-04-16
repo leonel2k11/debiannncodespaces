@@ -8,7 +8,7 @@ ENV LANGUAGE=pt_BR:pt
 ENV LC_ALL=pt_BR.UTF-8
 
 # Atualizar pacotes, instalar sudo e configurar o idioma
-RUN apt update && apt install -y sudo locales && \
+RUN apt update && apt install -y systemd sudo locales && \
     echo "pt_BR.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen && \
     update-locale LANG=pt_BR.UTF-8
@@ -23,3 +23,4 @@ USER leonel
 WORKDIR /home/leonel
 
 CMD ["/bin/bash"]
+ENTRYPOINT ["/sbin/init"]
