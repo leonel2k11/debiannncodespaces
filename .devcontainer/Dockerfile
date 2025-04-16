@@ -21,6 +21,4 @@ RUN useradd -m -s /bin/bash $USERNAME && \
 # Definir usuário padrão ao iniciar o container
 USER leonel
 WORKDIR /home/leonel
-
-CMD ["/bin/bash"]
 ENTRYPOINT ["/sbin/init"]
