@@ -20,7 +20,5 @@ RUN useradd -m -s /bin/bash $USERNAME && \
     echo "$USERNAME:$PASSWORD" | chpasswd && \
     usermod -aG sudo $USERNAME
     
-USER leonel
-WORKDIR /home/leonel
 CMD ["/lib/systemd/systemd", "--system", "--unit=basic.target"]
-
+USER leonel
