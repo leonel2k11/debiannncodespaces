@@ -1,7 +1,7 @@
 {
   "name": "Debian Codespace",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
     "overrideCommand": false,
     "privileged": true
   }
