@@ -8,17 +8,19 @@ ENV LANGUAGE=pt_BR:pt
 ENV LC_ALL=pt_BR.UTF-8
 
 # Atualizar pacotes, instalar sudo e configurar o idioma
-RUN apt update && apt install -y systemd sudo locales && \
-    echo "pt_BR.UTF-8 UTF-8" > /etc/locale.gen && \
+RUN apt update && apt install -y rsyslog systemd-cron systemd sudo locales \
+    && rm -f /usr/local/bin/systemctl \
+    && echo "pt_BR.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen && \
-    update-locale LANG=pt_BR.UTF-8
-
+    update-locale LANG=pt_BR.UTF-8 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+    
 # Criar usuário e definir senha
 RUN useradd -m -s /bin/bash $USERNAME && \
     echo "$USERNAME:$PASSWORD" | chpasswd && \
     usermod -aG sudo $USERNAME
-
-# Definir usuário padrão ao iniciar o container
+    
 USER leonel
 WORKDIR /home/leonel
-ENTRYPOINT ["/sbin/init"]
+CMD ["/lib/systemd/systemd", "--system", "--unit=basic.target"]
+
